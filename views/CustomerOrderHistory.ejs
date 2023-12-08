@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Welcome <%= customer.CUSTOMER_NAME %></title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    
+    <script>
+            // const entities = require("entities")
+            // const mysql = require("mysql2/promise");
+            window.onload = async function () {
+              function generateOrderList() {
+                var e = [];
+
+                <% for (var i = 0; i < len.length-1; i++) { %>
+                    e.push('<%= len[i] %>,');
+                <% } %>
+                e.push('<%= len[len.length-1] %>');
+
+                return e;
+              }
+
+              function alertOnDelete() {
+                <% if( url == "saved") { %>
+                    alert("Order Deleted");
+                <% } %>
+              }
+
+              alertOnDelete();
+
+              generateOrderList();
+              // console.log(<%=customer%>);
+
+              // Get the container where you want to append the order items
+              const orderContainer = document.getElementById("form-container");
+
+              // // Get the customer name
+              // // const customerName = "<%=customer.CUSTOMER_NAME%>";
+
+              // // Get the order list
+              const orderList = generateOrderList();
+              // console.log("ORDER LIST: " + orderList);
+
+              // // Iterate over the order list and create HTML elements
+              orderList.forEach((item) => {
+                // Create a new div for each item
+                const newItemDiv = document.createElement("label");
+                // newItemDiv.classList.add("form-container");
+
+                // Create an h2 element for the item id
+                const newItemId = document.createElement("h3");
+                // newItemId.textContent = `${item.id}`;
+
+                // Create an h5 element for the customer name
+                // const newCustomerName = document.createElement("h2");
+                newItemId.textContent = item;
+                const br = document.createElement("space");
+
+                // Append the elements to the new div
+                newItemDiv.appendChild(newItemId);
+      newItemDiv.appendChild(br);
+                orderContainer.appendChild(newItemDiv);
+                // Append the new div to the order container
+                // orderContainer.appendChild(newItemDiv);
+
+              });
+            };
+    </script>
+  </head>
+  <body>
+    <h1>Order History for <%= customer.CUSTOMER_NAME %></h1>
+    <form>
+      <!--Customer Name-->
+      <div id="form-container" class="form-container"></div>
+
+      <!-- <div class="form-container"> -->
+      <div class="button-container">
+        <!--Back to homepage-->
+        <button type="button" onclick="goToHompage()">Back</button>
+       <!--<button type="button" onclick="deleteMenuItem()">Delete Menu Item Beta</button> -->
+
+        <button
+        type="button"
+        onclick="window.location.href = '/CustomerOrderHistoryDelete?id=<%=customer.CUSTOMER_ID%>';"
+         >
+         Delete All Ordered Items
+      </button>
+        
+
+        <!--Submit Chnages to customer-->
+      </div>
+    </form>
+    <!--Links to Create New Order, Order HIstory, Account Managnment-->
+    <script>
+      function manageAcctPage() {
+        // Get the URL query parameters
+        const urlSearchParams = new URLSearchParams(window.location.search);
+
+        // Convert the URL query parameters to a plain object
+        const queryParams = Object.fromEntries(urlSearchParams.entries());
+
+        // Extract the customer ID from the queryParams object
+        const customerId = queryParams.id;
+
+        // console.log("CUSTOMER_ID: " + <%=customer.CUSTOMER_ID%>);
+        // const customerObject = JSON.parse(id);
+        // const customerId = customerObject.CUSTOMER_ID;
+        // console.log("PASCODE: " + customerId);
+        window.location.href =
+          "/CustomerAccountManagement/" + <%=customer.CUSTOMER_ID%>;
+      }
+
+      function goToHompage() {
+        const customerID = <%= customer.CUSTOMER_ID%>;
+        window.location.href = "/CustomerHomepage/" + customerID;
+      }
+
+      function deleteMenuItem() {
+        const menuItem = document.getElementById("menu-item").value;
+
+        const confirmation = confirm(`Are you sure you want to delete ${menuItem}?`);
+
+        if (confirmation) {
+          // Send a request to the server to delete the menuItem
+          fetch(`/deleteMenuItem/${encodeURIComponent(menuItem)}`, {
+            method: 'DELETE',
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              alert(`${menuItem} has been deleted.`);
+              // Optionally, you can update the UI or redirect the user
+            } else {
+              alert(`Failed to delete ${menuItem}.`);
+            }
+          })
+          .catch(error => {
+            console.error('Error during deletion:', error);
+          });
+        }
+      }
+
+
+
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+

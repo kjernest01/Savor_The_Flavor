@@ -1,0 +1,29 @@
+{
+  "name": "savor-the-flavor",
+  "version": "1.0.0",
+  "description": "> FirstPage.html\r > Entry page for Website\r > CustomerLogin.html\r > Customer Login Page (directed from FirstPage.html)\r > (TO-DO: Create customer login function)\r > EmployeeLogin.html\r > Employee Login Page (directed from FirstPage.html)\r > (TO-DO: Create employee login function)\r > NewCustomer.html\r > First-time Customer Login Page (directed from CustomerLogin.html)\r > (TO-DO: Create customer creation function)\r > CustomerAccountCreation.html\r > InventoryManagement.html\r > CustomerHomepage.html\r > CustomerAccountManagement.html",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify ./models/Customer.js ./public/js/CustomerLogin.js -o ./public/dist/CustomerLogin-bundle.js",
+    "start": "npm install && npm run build && nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "browserify": "^17.0.0",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.6.5",
+    "nodemon": "^3.0.1",
+    "process": "^0.11.10"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.3",
+    "@babel/preset-env": "^7.23.3",
+    "babel-loader": "^9.1.3",
+    "webpack-cli": "^5.1.4"
+  }
+}

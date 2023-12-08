@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= customer.CUSTOMER_NAME %>'s Account Management</title>
+    <!--Links html to css-->
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+  </head>
+  <body>
+    <h1><%= customer.CUSTOMER_NAME %>'s Account Management</h1>
+    <form>
+      <!--Customer Name-->
+      <div class="form-container">
+        <h2>Name:</h2>
+        <input
+          type="text"
+          id="customerName"
+          value="<%=customer.CUSTOMER_NAME%>"
+        />
+      </div>
+
+      <!-- ID Doesn't need to be public info does it?-->
+      <!-- <div class="form-container">
+        <h2>ID:</h2>
+        <h2 class="field"><%= customer.CUSTOMER_ID %></h2>
+      </div> -->
+
+      <!--Phone Number-->
+      <div class="form-container">
+        <h2>Ph #:</h2>
+        <input
+          type="text"
+          id="customerPhNumber"
+          value="<%=customer.PHONE_NUMBER%>"
+        />
+      </div>
+
+      <div class="form-container">
+        <h2>Password</h2>
+        <input
+          type="text"
+          id="customerPassword"
+          value="<%=customer.CUSTOMER_PASSWORD%>"
+        />
+      </div>
+
+      <!--Orders Available in Order History-->
+      <!-- <div class="form-container">
+        <h2>Orders:</h2>
+        <h2 class="field">n/a</h2>
+      </div> -->
+
+      <div class="button-container">
+        <!--Back to homepage-->
+        <button type="button" onclick="goToHompage()">Back</button>
+        <!--Submit Chnages to customer-->
+        <button type="button" onclick="updateCustomerInformation()">
+          Submit Changes
+        </button>
+      </div>
+    </form>
+    <script>
+      /**
+       * update customer information
+       */
+      function updateCustomerInformation() {
+        const customerID = <%= customer.CUSTOMER_ID%>;
+        const customerName = document.getElementById("customerName").value;
+        const customerPhNumber = document.getElementById("customerPhNumber").value;
+        const customerPwrd = document.getElementById("customerPassword").value;
+
+        if (customerName=="" || customerPhNumber == "" || customerPwrd == "" || customerPhNumber.length > 10
+        || customerName.length > 25 || customerPhNumber.length > 25){
+          alert("Fill All Details.\n\n> Password & Name should be only 10 digits in length\n> Name should be only 25 characters in length");
+          return;
+        }
+
+        //maybe post alert of items that will be changed
+        alert("Account Updated!");
+        window.location.href = "/CustomerAccountManagement/" + customerID + "/" + customerName + "/" + customerPhNumber + "/" + customerPwrd;
+      }
+
+      /**
+       * redirect to customer homepage
+       */
+      function goToHompage() {
+        const customerID = <%= customer.CUSTOMER_ID%>;
+        window.location.href = "/CustomerHomepage/" + customerID;
+      }
+    </script>
+  </body>
+</html>
