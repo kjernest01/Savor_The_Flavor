@@ -22,3 +22,15 @@ Here, you should be able to see a responsive webpage titled `Savor The Flavor`.
 ## DISCLAIMER
 
 This project is not equipped to be hosted online yet since it makes use of the express server to render and GET files.
+
+#### Note: This project was developed by a group of database designers. The original project can be found at this link: https://github.com/Jongrimes20/Savor-The-Flavor
+
+#### The original team members of the project are
+
+Jonathan Kopuri (kjernest01)
+Jon Grimes (Jongrimes20)
+JC Garza (JCGarzaa)
+Karina Varughese (Karina-Varughese)
+Alex JM
+
+#### This project is currently being further developed by Jonathan Kopuri
